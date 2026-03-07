@@ -67,19 +67,19 @@ ${stepsList}
 `.trim();
 
   const mermaidCode = `
-graph TD
-    Start((Mulai)) --> step1
-    step1["Persiapan dokumen<br>dan peralatan"] --> step2
-    step2{"Apakah data<br>lengkap?"}
-    step2 -- Ya --> step3["Verifikasi kelengkapan<br>data awal"]
-    step2 -- Tidak --> step1
-    step3 --> step4{"Lolos Quality<br>Control?"}
-    step4 -- Ya --> step5["Dokumentasi dan<br>pelaporan"]
-    step4 -- Tidak --> step3
-    step5 --> End((Selesai))
+flowchart TD
+    A(("Mulai")) --> B
+    B["Persiapan dokumen<br>dan peralatan"] --> C
+    C{"Apakah data<br>lengkap?"}
+    C -- Ya --> D["Verifikasi kelengkapan<br>data awal"]
+    C -- Tidak --> B
+    D --> E{"Lolos Quality<br>Control?"}
+    E -- Ya --> F["Dokumentasi dan<br>pelaporan"]
+    E -- Tidak --> D
+    F --> G(("Selesai"))
     
-    style Start fill:#f9f,stroke:#333,stroke-width:2px
-    style End fill:#f9f,stroke:#333,stroke-width:2px
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style G fill:#f9f,stroke:#333,stroke-width:2px
 `.trim();
 
   const checklist = data.steps.map(step => `[ ] ${step}`);
@@ -157,13 +157,15 @@ export const generateSOP = async (data: SOPData): Promise<AIOutput> => {
       
       Mohon buat output berikut dalam format JSON terstruktur (Gunakan Bahasa Indonesia):
       1. sopText: String format Markdown dari dokumen SOP lengkap. Harus mencakup bagian seperti Judul, Divisi, Tujuan, Langkah-langkah Prosedur (kembangkan langkah yang diberikan dengan lebih detail jika perlu), Pengecualian, dan Referensi.
-      2. mermaidCode: String kode graph TD Mermaid.js yang valid.
-         ATURAN MUTLAK FLOWCHART:
-         a. WAJIB ADA PERCABANGAN (DECISION NODE): Sertakan minimal 2 node keputusan dengan kurung kurawal {}. Contoh: B{Syarat Lengkap?} -- Ya --> C[Proses] / B -- Tidak --> D[Kembali].
-         b. JANGAN LURUS TERUS: Maksimal 6 node berurutan tanpa percabangan. Pecah alur menjadi skenario realistis.
-         c. WORD WRAP: Bungkus teks dalam node dengan tag <br> jika lebih dari 4 kata. Contoh: A[Periksa kelengkapan<br>berkas pengguna].
-         d. Gunakan nama node sederhana (step1, step2, decision1, dst).
-         e. JANGAN gunakan markdown code block.
+      2. mermaidCode: String kode flowchart TD Mermaid.js yang valid.
+         ATURAN MUTLAK FLOWCHART (STRICT SYNTAX):
+         a. HEADER: Wajib mulai dengan 'flowchart TD'.
+         b. ID NODE: Gunakan huruf kapital tunggal/ganda tanpa spasi (A, B, C, dst).
+         c. LABEL NODE: WAJIB dibungkus tanda kutip ganda. Contoh: A["Teks Label"].
+         d. DECISION NODE: Wajib ada minimal 2 node keputusan dengan kurung kurawal {} dan label berkutip. Contoh: B{"Apakah Valid?"}.
+         e. WORD WRAP: Gunakan tag <br> di dalam tanda kutip jika teks > 4 kata. Contoh: C["Periksa dokumen<br>kelengkapan"].
+         f. DILARANG menggunakan tanda kutip ganda (") di dalam teks label. Gunakan tanda kutip tunggal (') jika perlu.
+         g. JANGAN gunakan markdown code block.
       3. checklist: Array string untuk checklist harian berdasarkan SOP ini.
       4. kpis: Array string untuk Key Performance Indicators (KPI) guna mengukur keberhasilan SOP ini.
       5. linkage: String yang menyarankan keterkaitan lintas departemen atau SOP terkait yang sebaiknya dibuat selanjutnya.
