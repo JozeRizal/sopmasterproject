@@ -1,0 +1,20 @@
+{
+  "name": "SOP MASTER",
+  "short_name": "SOP MASTER",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3B82F6",
+  "icons": [
+    {
+      "src": "https://picsum.photos/seed/sopmaster/192/192",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://picsum.photos/seed/sopmaster/512/512",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

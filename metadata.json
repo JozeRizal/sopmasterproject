@@ -1,0 +1,5 @@
+{
+  "name": "SOP MASTER",
+  "description": "AI-powered SOP & Flowchart Generator with PWA support",
+  "requestFramePermissions": ["microphone"]
+}
