@@ -66,6 +66,7 @@ export const Settings: React.FC<SettingsProps> = ({ onSave, initialSettings, onC
             <label className="block text-sm font-medium text-gray-700 mb-2">Warna Tema Utama</label>
             <div className="flex flex-wrap gap-3 mb-3">
               {[
+                '#000000', // Black
                 '#3B82F6', // Blue
                 '#EF4444', // Red
                 '#10B981', // Green
@@ -79,7 +80,6 @@ export const Settings: React.FC<SettingsProps> = ({ onSave, initialSettings, onC
                 '#84CC16', // Lime
                 '#F43F5E', // Rose
                 '#64748B', // Slate
-                '#000000', // Black
               ].map((color) => (
                 <button
                   key={color}
