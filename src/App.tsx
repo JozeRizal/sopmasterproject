@@ -13,7 +13,7 @@ const CoreApp: React.FC<{ onNukeReset: () => void }> = ({ onNukeReset }) => {
   const [wizardState, setWizardState] = useLocalStorage<WizardState>('wizardState', getInitialWizardState());
   const [settings, setSettings] = useLocalStorage('settings', {
     logo: '',
-    primaryColor: '#3B82F6'
+    primaryColor: '#000000'
   });
   
   const [isGenerating, setIsGenerating] = useState(false);
