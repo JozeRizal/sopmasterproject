@@ -18,7 +18,7 @@ export interface AIOutput {
 // Initialize Gemini AI
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || '' });
 
-const MODEL_NAME = "gemini-2.0-flash";
+const MODEL_NAME = "gemini-2.5-flash";
 
 // Mock Fallbacks
 const mockGenerateSteps = async (title: string, division: string, objective: string): Promise<string[]> => {
